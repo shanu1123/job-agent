@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: job_agent_postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+
+  resume_service:
+    build: ./services/resume_service
+    container_name: job_agent_resume_service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      OUTPUT_DIR: /app/output
+    volumes:
+      - ./output:/app/output
+    depends_on:
+      - postgres
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: job_agent_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - TZ=Asia/Kolkata
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  n8n_data:
