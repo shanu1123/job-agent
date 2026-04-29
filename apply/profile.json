@@ -1,0 +1,14 @@
+{
+  "first_name": "Tushar",
+  "last_name": "Kumar",
+  "email": "tushar@example.com",
+  "phone": "+91-9999999999",
+  "country": "India",
+  "linkedin": "",
+  "resume_path": "./output/tushar-kumar-amazon-sre.pdf",
+  "education": {
+    "school": "Aggarwal College",
+    "degree": "Bachelor's Degree",
+    "field": "Computer Science"
+  }
+}

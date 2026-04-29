@@ -1,0 +1,12 @@
+{
+  "name": "job-agent-apply",
+  "version": "1.0.0",
+  "description": "Playwright auto-apply module",
+  "main": "apply/index.js",
+  "scripts": {
+    "apply": "node apply/index.js"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0"
+  }
+}
