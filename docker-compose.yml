@@ -16,15 +16,19 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   resume_service:
-    build: ./services/resume_service
+    build:
+      context: .
+      dockerfile: services/resume_service/Dockerfile
     container_name: job_agent_resume_service
     restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
       OUTPUT_DIR: /app/output
+      HEADLESS: "true"
     volumes:
       - ./output:/app/output
+      - .:/job-agent
     depends_on:
       - postgres
 

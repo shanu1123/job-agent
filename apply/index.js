@@ -15,7 +15,13 @@ function detectAdapter(url) {
 }
 
 (async () => {
-  const browser = await chromium.launch({ headless: false });
+  const headless = process.env.HEADLESS === 'true';
+  const launchArgs = headless
+    ? { headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] }
+    : { headless: false };
+
+  console.log(`[index] Browser mode: ${headless ? 'headless (Docker)' : 'headed (local)'}`);
+  const browser = await chromium.launch(launchArgs);
   const page = await browser.newPage();
 
   const adapter = detectAdapter(jobUrl);
@@ -24,6 +30,10 @@ function detectAdapter(url) {
 
   await adapter.run(page, jobUrl, profile, { dryRun: true });
 
-  console.log('[index] Done. Browser left open.');
-  // Browser intentionally not closed
+  if (headless) {
+    console.log('[index] Done. Closing browser (headless mode).');
+    await browser.close();
+  } else {
+    console.log('[index] Done. Browser left open (headed mode).');
+  }
 })();
