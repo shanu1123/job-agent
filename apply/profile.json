@@ -1,13 +1,14 @@
 {
-  "first_name": "Tushar",
+  "first_name": "Shanu",
   "last_name": "Kumar",
-  "email": "tushar@example.com",
-  "phone": "+91-9999999999",
+  "email": "Shanu.Kumar2@brillio.com",
+  "phone": "+918210027461",
   "country": "India",
+  "location": "Bangalore, India",
   "linkedin": "",
-  "resume_path": "./output/tushar-kumar-amazon-sre.pdf",
+  "resume_path": "output/base_resume_shanu_kumar.txt",
   "education": {
-    "school": "Aggarwal College",
+    "school": "B.Tech in Computer Science and Information",
     "degree": "Bachelor's Degree",
     "field": "Computer Science"
   }

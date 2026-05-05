@@ -3,3 +3,6 @@ uvicorn
 python-docx
 reportlab
 pydantic
+requests
+pypdf
+beautifulsoup4

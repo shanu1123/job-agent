@@ -24,6 +24,7 @@ class JobPosting(BaseModel):
     apply_url: str | None = None
     posted_at: str | None = None
     jd_text: str
+    required_skills: list[str] = []
 
 
 class TailoredContent(BaseModel):
@@ -65,3 +66,18 @@ class ScoreJobResponse(BaseModel):
     misc_score: float
     decision: str
     explanation: dict = {}
+
+
+class MatchAndRenderRequest(BaseModel):
+    """Flexible request for /match-and-render.
+    Supply either job_posting or job_url (parsed automatically).
+    Supply either candidate_profile or base_resume_path.
+    tailored_content is optional; defaults are used when omitted.
+    """
+    candidate_profile: CandidateProfile | None = None
+    base_resume_path: str | None = None
+    job_posting: JobPosting | None = None
+    job_url: str | None = None
+    tailored_content: TailoredContent | None = None
+    template_name: str = "default"
+    metadata: dict = {}

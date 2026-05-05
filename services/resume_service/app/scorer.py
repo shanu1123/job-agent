@@ -9,6 +9,14 @@ def score_job(request: ScoreJobRequest) -> ScoreJobResponse:
     jd_lower = jp.jd_text.lower()
     title_lower = jp.title.lower()
 
+    # Use explicit required_skills when available; fall back to JD text scan
+    job_required_skills = jp.required_skills if jp.required_skills else [
+        s for s in cp.master_skills if s.lower() in jd_lower
+    ]
+
+    print(f"[scorer] candidate_skills = {cp.master_skills}")
+    print(f"[scorer] job_required_skills = {job_required_skills}")
+
     # 1. Title Score
     title_match = any(role.lower() in title_lower for role in cp.target_roles)
     if title_match:
@@ -18,10 +26,15 @@ def score_job(request: ScoreJobRequest) -> ScoreJobResponse:
     else:
         title_score = 0.0
 
-    # 2. Skills Score
-    matched_skills = [s for s in cp.master_skills if s.lower() in jd_lower]
-    missing_skills = [s for s in cp.master_skills if s.lower() not in jd_lower]
-    skills_score = round((len(matched_skills) / len(cp.master_skills) * 35), 2) if cp.master_skills else 0.0
+    # 2. Skills Score — intersection of candidate skills and JD required skills
+    candidate_lower = {s.lower(): s for s in cp.master_skills}
+    matched_skills = [s for s in job_required_skills if s.lower() in candidate_lower]
+    missing_skills  = [s for s in job_required_skills if s.lower() not in candidate_lower]
+
+    print(f"[scorer] matched_skills = {matched_skills}")
+    print(f"[scorer] missing_skills = {missing_skills}")
+
+    skills_score = round((len(matched_skills) / len(job_required_skills) * 35), 2) if job_required_skills else 0.0
 
     # 3. Years Score
     exp = cp.total_years_experience or 0

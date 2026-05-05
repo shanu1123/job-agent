@@ -1,0 +1,126 @@
+Full Name: Shanu Kumar
+Employee ID: 136106
+Company Email: Shanu.Kumar2@brillio.com
+Mobile Number: 918210027461
+Location: Bren Optimus, Bangalore, India
+
+PROFILE
+Software Developer at Brillio Technologies Pvt Limited, Bengaluru | April 2024 – Present
+
+Proficient in Java, JavaScript, TypeScript, ReactJS, Spring, Spring Boot, C#, ASP.NET, and MySQL with a focus on full-stack development and database management.
+
+Delivered high-quality, maintainable code adhering to best practices in a fast-paced agile development environment.
+
+Worked on projects such as a Mutual Fund Investment Management System, E-commerce Sportswear Website, and an AI-Powered Wireframe Generator.
+
+Demonstrated strong collaboration and communication skills, facilitating effective teamwork, smooth project coordination, and seamless cross-functional integration.
+
+Worked on the Sage Accounting project for 4 months as a fresher, contributing to automation development. Actively participated in agile processes such as sprint planning, grooming, daily standups, sprint reviews, and retrospectives.
+
+Experienced in collaborating with cross-functional teams to deliver responsive, user-friendly web applications.
+
+Quick learner with strong problem-solving skills, a team-player mindset, and a keen interest in improving user experiences through intuitive and efficient frontend solutions.
+
+EDUCATION
+B.Tech in Computer Science and Information
+Intermediate schooling from International Public School
+SSLC from Surendranath Centenary School
+
+CERTIFICATIONS
+Certification in Data Science course issued by Coursera authorized by IBM
+Certification in Introduction to Cloud Computing through Udemy
+Certification course on AWS through Udemy
+Certification on Agile Principles and Methodologies through Percipio
+
+TECHNICAL SKILLS
+Programming Languages: Java, JavaScript, TypeScript, C#, Node.js, HTML, CSS
+Frontend: ReactJS, Tailwind CSS
+Backend: Spring, Spring Boot, ExpressJS, ASP.NET, REST APIs
+Databases: MySQL, MongoDB, NoSQL, GraphQL, TiDB Cloud Platform
+Cloud and DevOps: AWS, Microsoft Azure, Docker, Jenkins, GitHub, CircleCI
+Tools: VS Code, Spring Tool Suite, Eclipse, MySQL Workbench, Postman, Swagger, Git, Jira, Confluence, Slack, Splunk, New Relic, Okta, Split.io, Checkmarx CxOne
+Operating Systems: Linux, Windows
+Methodologies: Agile Methodologies, Sprint Planning, Grooming, Daily Standups, Sprint Review, Sprint Retrospective
+
+EXPERIENCE
+
+Project: Move Inc
+Client: Realtor
+Duration: 1 February – 30 June
+Role: Developer
+Environment: VS Code, AWS, Splunk, Jira, Confluence, GitHub, CircleCI, Slack, Jenkins, Split.io, Swagger, Checkmarx CxOne
+
+Description:
+Worked as a Full Stack Developer on the Realtor dashboard team, responsible for fixing bugs, implementing new features, and enhancing overall dashboard functionality. Played a key role in migrating APIs across multiple repositories, ensuring smooth integration and handling of dashboard-related functionalities. Managed migration of URLs to maintain consistency and improve redirection efficiency. Implemented an API split feature to optimize scalability and performance.
+
+Performed deep debugging and troubleshooting to ensure ideal results while working on complex, high-priority tickets. Contributed to full-stack development across frontend and backend components. Updated policies for over 50 S3 buckets in AWS, ensuring secure access control. Updated npm versions for 10 repositories to ensure compatibility and performance improvements. Addressed Maven issues to optimize build processes.
+
+Responsibilities:
+Fixed bugs and enhanced dashboard features.
+Improved user experience across dashboard workflows.
+Migrated and refactored APIs across multiple repositories.
+Improved system performance and integration consistency.
+Managed URL migration and redirection functionality.
+Implemented API split feature for scalability and performance.
+Performed debugging and troubleshooting for complex issues.
+Worked on frontend and backend development.
+Updated AWS S3 bucket policies for secure access control.
+Updated npm versions across 10 repositories.
+Resolved Maven build issues.
+
+Project: Sage Distribution and Manufacturing Operations
+Client: Sage Global Services Limited
+Duration: 26 August – 7 January
+Role: Developer
+Environment: Visual Studio Code, GitHub, Sage integrated Jira and Confluence, Selenium
+
+Description:
+SDMO is designed for operational users in manufacturing and distribution sectors. It uses cloud-native technology and integrates with Sage Intacct to provide a single dedicated platform to manage operations and financials.
+
+SDMO helps organizations automate and manage complex tasks using capabilities such as real-time materials resource planning, dynamic work orders, and digital calendars. It provides adaptability and agility to respond to demand and supply changes.
+
+Responsibilities:
+Worked on automation testing and manual testing.
+Performed functional testing, internal testing, and regression testing.
+Reproduced backlog bugs.
+Understood client requirements and prepared test scenarios.
+Participated in sprint planning, sprint grooming, daily standups, sprint reviews, and retrospectives.
+
+Project: Mutual Fund Investment Management System
+Client: Brillio
+Duration: July 2024 – August 2024
+Role: Developer
+Environment: Azure Virtual Machine, Visual Studio
+
+Description:
+Developed a mutual fund platform using .NET Framework with C# following MVC architecture. Features included SIP and lump-sum investment options, return calculator, user portfolio management, fund modification, and cancellation with accurate return calculations.
+
+Responsibilities:
+Worked as a full-stack developer following MVC architecture.
+
+Project: Ecommerce Sportswear Website
+Client: Brillio
+Duration: May 2024 – June 2024
+Role: Developer
+Environment: Spring Tool Suite, Visual Studio Code, MySQL Workbench
+
+Description:
+Developed FlexiFit, a sportswear e-commerce platform using React.js, Java Spring Boot, and SQL following MVC architecture. Features included product catalog, shopping cart and checkout, user management, admin dashboard for inventory control and revenue visualization, and order processing.
+
+Responsibilities:
+Worked as a full-stack developer following MVC architecture.
+
+Project: AI-Powered Wireframe Generator
+Client: Brillio
+Duration: November 2023 – December 2023
+Role: Developer
+Environment: VS Code, Figma, OpenAI
+
+Description:
+Created an AI-powered wireframe generator that takes user prompts and generates wireframes for mobile or web applications using React.js, OpenAI, CSS, REST APIs, and Figma.
+
+Responsibilities:
+Worked on AI integration.
+Utilized Hugging Face models to convert user text inputs into image-based wireframe designs.
+Automated parts of the design process.
+Developed comprehensive test cases covering multiple scenarios to ensure user experience and functionality.

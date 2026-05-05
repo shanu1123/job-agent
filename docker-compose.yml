@@ -26,6 +26,7 @@ services:
     environment:
       OUTPUT_DIR: /app/output
       HEADLESS: "true"
+      N8N_JOB_INPUT_WEBHOOK_URL: "http://n8n:5678/webhook/job-input"
     volumes:
       - ./output:/app/output
       - .:/job-agent
