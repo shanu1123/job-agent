@@ -37,12 +37,167 @@ mkdir -p output
 docker compose up --build -d
 ```
 
+## Database
+
+PostgreSQL is used to persist all job application tracking data.
+
+### Connection
+
+The resume service connects to PostgreSQL using `DATABASE_URL` environment variable:
+```
+DATABASE_URL=postgresql://postgres:postgres@postgres:5432/job_agent
+```
+
+Defaults are configured in `docker-compose.yml` if `.env` is not present.
+
+### Schema
+
+The `applications` table is automatically created on service startup:
+
+```sql
+CREATE TABLE applications (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    run_id TEXT UNIQUE,
+    job_url TEXT NOT NULL,
+    job_source TEXT,
+    company TEXT,
+    title TEXT,
+    location TEXT,
+    decision TEXT,
+    overall_score NUMERIC,
+    actual_resume_ats_score NUMERIC,
+    actual_resume_keyword_coverage_pct NUMERIC,
+    generated_resume_ats_score NUMERIC,
+    generated_resume_keyword_coverage_pct NUMERIC,
+    matched_keywords JSONB,
+    missing_keywords JSONB,
+    suggestions JSONB,
+    summary TEXT,
+    resume_pdf_path TEXT,
+    resume_docx_path TEXT,
+    apply_status TEXT,
+    apply_return_code INTEGER,
+    review_status TEXT DEFAULT 'pending_review',
+    reviewed_at TIMESTAMPTZ,
+    review_notes TEXT,
+    slack_sent BOOLEAN DEFAULT FALSE,
+    dry_run BOOLEAN DEFAULT TRUE,
+    error TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+### Query Applications
+
+Get recent applications:
+```bash
+curl "http://localhost:8000/applications?limit=10"
+```
+
+Filter by decision:
+```bash
+curl "http://localhost:8000/applications?decision=tailor&limit=20"
+```
+
+Filter by status:
+```bash
+curl "http://localhost:8000/applications?status=completed&limit=20"
+```
+
+Get specific application by ID:
+```bash
+curl "http://localhost:8000/applications/{application_id}"
+```
+
+Get application by run_id:
+```bash
+curl "http://localhost:8000/applications/by-run/{run_id}"
+```
+
+Update application review status:
+```bash
+curl -X PATCH "http://localhost:8000/applications/{application_id}/review" \
+  -H "Content-Type: application/json" \
+  -d '{"review_status": "approved", "review_notes": "Looks good"}'
+```
+
+Mark Slack message as sent:
+```bash
+curl -X PATCH "http://localhost:8000/applications/{application_id}/slack-sent" \
+  -H "Content-Type: application/json" \
+  -d '{"slack_sent": true}'
+```
+
 ## Service URLs
 
 | Service        | URL                              |
 |----------------|----------------------------------|
 | Resume Service | http://localhost:8000            |
 | Health Check   | http://localhost:8000/health     |
+| Dashboard      | http://localhost:8000/dashboard  |
+
+## Dashboard
+
+A web-based dashboard for tracking job applications and submitting new jobs for analysis.
+
+### Access Dashboard
+
+Open in browser:
+```
+http://localhost:8000/dashboard
+```
+
+### Features
+
+- **Application History Table**: View last 50 applications with:
+  - Created timestamp
+  - Company, title, location
+  - Decision badge (tailor/review/skip)
+  - Base resume ATS score (actual_resume_ats_score)
+  - Generated resume ATS score (generated_resume_ats_score)
+  - Generated keyword coverage percentage (generated_resume_keyword_coverage_pct)
+  - Apply status (queued/running/completed/failed)
+  - Review status (pending_review/reviewed/approved/rejected)
+  - Return code
+  - Resume PDF path (click to copy)
+  - Job URL link
+
+- **Job Submission Form**: Enter job URL and click "Analyze & Apply" to trigger the full workflow
+
+- **Application Detail View**: Click any job title to see:
+  - Full job information
+  - Raw overall score (from job scoring algorithm)
+  - Base resume ATS score and keyword coverage
+  - Generated resume ATS score and keyword coverage
+  - Decision and scores
+  - Matched and missing keywords
+  - Suggestions for improvement
+  - Summary analysis
+  - Resume file paths
+  - Application status and error details
+  - Human review section with:
+    - Review status badge
+    - Review timestamp
+    - Review notes
+    - Buttons to mark as reviewed/approved/rejected
+    - Notes textarea for adding review comments
+  - Timestamps
+
+- **Auto-refresh**: Dashboard automatically refreshes every 30 seconds
+
+### Usage
+
+1. Open dashboard: http://localhost:8000/dashboard
+2. Enter a job URL in the form
+3. Click "Analyze & Apply"
+4. Wait a few seconds and refresh to see results
+5. Click job title to view detailed analysis
+6. Review the application and mark status:
+   - **Mark Reviewed**: Application has been reviewed
+   - **Approve**: Application is approved for submission
+   - **Reject**: Application should not be submitted
+7. Add optional review notes for future reference
 
 ## Test
 
@@ -103,6 +258,7 @@ curl -X POST http://localhost:8000/match-and-render \
 ```
 
 Response includes:
+- `application_id` — UUID of the persisted application record
 - `decision` — tailor / review / skip
 - `score` — full scoring breakdown
 - `resume.pdf_path`, `resume.docx_path`
@@ -141,25 +297,53 @@ Return Code: {{$('Check Apply Status').item.json.return_code}}"
 }
 ```
 
+### n8n — Mark Slack Sent (after Slack message succeeds)
+
+Add an HTTP Request node after the Slack node to mark the message as sent in the database.
+
+**HTTP Request Node Configuration:**
+
+| Field   | Value |
+|---------|-------|
+| Method  | PATCH |
+| URL     | `http://resume_service:8000/applications/{{ $('Match and Render').item.json.application_id }}/slack-sent` |
+| Body    | JSON |
+
+**Body:**
+```json
+{
+  "slack_sent": true
+}
+```
+
+**From host (outside Docker):**
+```bash
+curl -X PATCH "http://localhost:8000/applications/<application_id>/slack-sent" \
+  -H "Content-Type: application/json" \
+  -d '{"slack_sent": true}'
+```
+
 ## Using Matched/Tailored Resume for Apply Flow
 
 After `/match-and-render` generates a tailored resume, pass its path directly to the apply flow so Greenhouse uploads the job-specific PDF instead of the static default.
-
-### n8n — Open Visible Browser node body
-
-```json
-{
-  "job_url": "{{ $('Webhook1').item.json.body.job_url }}",
-  "resume_path": "{{ $('Match and Render').item.json.resume.pdf_path }}"
-}
-```
 
 ### n8n — Apply Job (Docker headless) node body
 
 ```json
 {
   "job_url": "{{ $('Webhook1').item.json.body.job_url }}",
-  "resume_path": "{{ $('Match and Render').item.json.resume.pdf_path }}"
+  "resume_path": "{{ $('Match and Render').item.json.resume.pdf_path }}",
+  "application_id": "{{ $('Match and Render').item.json.application_id }}"
+}
+```
+
+### n8n — Open Visible Browser node body
+
+```json
+{
+  "job_url": "{{ $('Webhook1').item.json.body.job_url }}",
+  "resume_path": "{{ $('Match and Render').item.json.resume.pdf_path }}",
+  "application_id": "{{ $('Match and Render').item.json.application_id }}"
 }
 ```
 
@@ -258,7 +442,7 @@ Body:
 
 ## Next Steps
 
-- Add job scoring endpoint to rank job postings against candidate profile
-- Add n8n workflow for automated job discovery and application tracking
 - Add LLM-based tailoring to auto-generate summaries and bullets from JD
-- Add database integration to persist candidates, jobs, and resume variants
+- Add advanced analytics and reporting on application success rates
+- Add email notifications for application status changes
+- Add support for additional job boards beyond Greenhouse

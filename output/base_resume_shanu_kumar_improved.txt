@@ -1,0 +1,78 @@
+Full Name: Shanu Kumar
+Employee ID: 136106
+Company Email: Shanu.Kumar2@brillio.com
+Mobile Number: 918210027461
+Location: Bangalore, India
+
+PROFILE
+Full Stack Developer with 2+ years of experience in building scalable web applications using Java, JavaScript, TypeScript, ReactJS, Spring Boot, and cloud technologies. Proven track record in API development, frontend engineering, automation testing, and Agile delivery. Strong problem-solving skills with focus on code quality and user experience.
+
+EDUCATION
+B.Tech in Computer Science and Information
+Intermediate schooling from International Public School
+SSLC from Surendranath Centenary School
+
+CERTIFICATIONS
+Certification in Data Science course issued by Coursera authorized by IBM
+Certification in Introduction to Cloud Computing through Udemy
+Certification course on AWS through Udemy
+Certification on Agile Principles and Methodologies through Percipio
+
+TECHNICAL SKILLS
+Programming Languages: Java, JavaScript, TypeScript, C#, Node.js, HTML, CSS
+Frontend: ReactJS, Tailwind CSS
+Backend: Spring, Spring Boot, ExpressJS, ASP.NET, REST APIs
+Databases: MySQL, MongoDB, NoSQL, GraphQL, TiDB Cloud Platform
+Cloud and DevOps: AWS, Microsoft Azure, Docker, Jenkins, GitHub, CircleCI
+Tools: VS Code, Spring Tool Suite, Eclipse, MySQL Workbench, Postman, Swagger, Git, Jira, Confluence, Slack, Splunk, New Relic, Okta, Split.io, Checkmarx CxOne
+Operating Systems: Linux, Windows
+Methodologies: Agile Methodologies, Sprint Planning, Grooming, Daily Standups, Sprint Review, Sprint Retrospective
+
+PROFESSIONAL EXPERIENCE
+
+Brillio Technologies Pvt Limited — Full Stack Developer
+Nov 2023 – Present | Bangalore, India
+
+Project: Realtor Dashboard (Move Inc)
+Client: Realtor
+Duration: Feb 2024 – Jun 2024
+- Developed and enhanced dashboard features using ReactJS, Java Spring Boot, REST APIs, and SQL.
+- Migrated and refactored APIs across multiple repositories to improve maintainability and integration consistency.
+- Implemented URL migration and redirection functionality to maintain consistency.
+- Implemented API split feature to optimize scalability and performance.
+- Performed deep debugging and troubleshooting for complex, high-priority tickets.
+- Updated policies for over 50 S3 buckets in AWS, ensuring secure access control.
+- Updated npm versions across 10 repositories to ensure compatibility and performance improvements.
+- Resolved Maven build issues to optimize build processes.
+- Worked on frontend and backend development using ReactJS, Java Spring Boot, AWS, Docker, Jenkins, and GitHub.
+- Participated in Agile ceremonies including sprint planning, grooming, daily standups, and reviews.
+
+Project: E-commerce Sportswear Website (FlexiFit)
+Duration: May 2024 – Jun 2024
+- Developed FlexiFit, a sportswear e-commerce platform using ReactJS, Java Spring Boot, and SQL following MVC architecture.
+- Built product catalog, shopping cart and checkout, user management features.
+- Created admin dashboard for inventory control and revenue visualization.
+- Implemented order processing functionality.
+
+Project: Mutual Fund Investment Management System
+Duration: Jul 2024 – Aug 2024
+- Developed mutual fund platform using .NET Framework with C# following MVC architecture.
+- Implemented SIP and lump-sum investment options, return calculator, user portfolio management.
+- Built fund modification and cancellation features with accurate return calculations.
+
+Project: AI-Powered Wireframe Generator
+Duration: Nov 2023 – Dec 2023
+- Built an AI-powered wireframe generator using ReactJS, REST APIs, OpenAI, CSS, and Figma.
+- Integrated Hugging Face models to convert user text prompts into image-based wireframe designs.
+- Automated parts of the design workflow and created comprehensive test cases.
+- Developed functionality for mobile and web application wireframe generation.
+
+Sage Global Services Limited — Developer
+Aug 2022 – Jan 2023 | Remote
+
+Project: Sage Distribution and Manufacturing Operations (SDMO)
+- Worked on automation testing and manual testing for cloud-native manufacturing and distribution platform.
+- Performed functional testing, internal testing, and regression testing.
+- Reproduced backlog bugs and prepared test scenarios based on client requirements.
+- Participated in sprint planning, sprint grooming, daily standups, sprint reviews, and retrospectives.
+- Used Visual Studio Code, GitHub, Selenium, Jira, and Confluence for testing and collaboration.

@@ -18,6 +18,14 @@ if (resumePathOverride) {
   console.log(`[index] Using resume path override: ${resumePathOverride}`);
 }
 
+// Read application_id and backend_url from environment
+const applicationId = process.env.APPLICATION_ID || '';
+const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
+if (applicationId) {
+  console.log(`[index] application_id = ${applicationId}`);
+  console.log(`[index] backend_url = ${backendUrl}`);
+}
+
 function detectAdapter(url) {
   if (/greenhouse\.io/i.test(url)) return require('./adapters/greenhouse');
   throw new Error(`No adapter found for URL: ${url}`);
@@ -37,7 +45,24 @@ function detectAdapter(url) {
   console.log(`[index] Detected adapter: ${adapter.name}`);
   console.log('[index] DRY-RUN mode — form will NOT be submitted');
 
-  await adapter.run(page, jobUrl, profile, { dryRun: true, headless });
+  const context = {
+    dryRun: true,
+    headless,
+    applicationId,
+    backendUrl
+  };
+
+  try {
+    await adapter.run(page, jobUrl, profile, context);
+  } catch (e) {
+    console.error(`[index] ERROR during adapter run: ${e.message}`);
+    if (!headless) {
+      console.log('[index] Headed mode — browser left open for manual debugging.');
+      return; // do not close browser
+    }
+    await browser.close();
+    process.exit(1);
+  }
 
   if (headless) {
     console.log('[index] Done. Closing browser (headless mode).');

@@ -2,14 +2,20 @@
   "first_name": "Shanu",
   "last_name": "Kumar",
   "email": "Shanu.Kumar2@brillio.com",
-  "phone": "+918210027461",
+  "phone": "82100 27461",
   "country": "India",
-  "location": "Bangalore, India",
-  "linkedin": "",
+  "country_code": "+91",
+  "current_location": "Bangalore, Karnataka, India",
+  "work_authorized_countries": ["India"],
+  "requires_visa_sponsorship": false,
+  "preferred_start_date": "Immediately",
+  "salary_expectation": "As per company standards",
+  "linkedin_profile": "",
   "resume_path": "output/base_resume_shanu_kumar.txt",
   "education": {
     "school": "B.Tech in Computer Science and Information",
     "degree": "Bachelor's Degree",
     "field": "Computer Science"
-  }
+  },
+  "summary": "Full Stack Developer with experience in Java, Spring Boot, ReactJS, REST APIs, MySQL, MongoDB, AWS, Docker, Jenkins, GitHub, Agile development, production debugging, API migrations, and full-stack web applications."
 }

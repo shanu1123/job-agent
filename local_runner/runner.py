@@ -41,6 +41,7 @@ def normalize_resume_path(raw: str) -> Optional[Path]:
 class ApplyVisibleRequest(BaseModel):
     job_url: str
     resume_path: Optional[str] = None
+    application_id: Optional[str] = None
 
 
 @app.get("/health")
@@ -66,6 +67,10 @@ def apply_visible(payload: ApplyVisibleRequest):
 
     env = os.environ.copy()
     env["HEADLESS"] = "false"
+    if payload.application_id:
+        env["APPLICATION_ID"] = payload.application_id
+        env["BACKEND_URL"] = "http://localhost:8000"
+        print(f"[runner] application_id = {payload.application_id}")
 
     try:
         subprocess.Popen(cmd, cwd=str(REPO_ROOT), env=env)
